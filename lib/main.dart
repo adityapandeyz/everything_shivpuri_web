@@ -74,12 +74,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Map<String, String> userData = {};
+
   Future<Map<String, String>> getUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String displayName = prefs.getString('displayName') ?? '';
+    String name = prefs.getString('displayName') ?? '';
     String email = prefs.getString('email') ?? '';
-    String photoUrl = prefs.getString('photoUrl') ?? '';
-    return {'displayName': displayName, 'email': email, 'photoUrl': photoUrl};
+    return {'name': name, 'email': email};
   }
 
   @override
@@ -97,12 +97,12 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Display Name: ${userData['displayName']}'),
-            Text('Email: ${userData['email']}'),
-            Image.network(
-              userData['photoUrl'] ?? '',
-              height: 100,
+          children: <Widget>[
+            Text(
+              'Name: ${userData['name']}',
+            ),
+            Text(
+              'Email: ${userData['email']}',
             ),
           ],
         ),
