@@ -83,13 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void initState() {
+  void initState() async {
+    userData = await getUserData();
     super.initState();
-    getUserData().then((data) {
-      setState(() {
-        userData = data;
-      });
-    });
   }
 
   @override
