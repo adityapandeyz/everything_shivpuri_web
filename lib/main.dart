@@ -73,17 +73,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Map<String, String> userData = {};
   Future<Map<String, String>> getUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String name = prefs.getString('name') ?? '';
+    String displayName = prefs.getString('displayName') ?? '';
     String email = prefs.getString('email') ?? '';
-    return {'name': name, 'email': email};
+    String photoUrl = prefs.getString('photoUrl') ?? '';
+    return {'displayName': displayName, 'email': email, 'photoUrl': photoUrl};
   }
 
   @override
   void initState() {
-    getUserData();
     super.initState();
+    getUserData().then((data) {
+      setState(() {
+        userData = data;
+      });
+    });
   }
 
   @override
@@ -92,12 +98,18 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('everything shivpuri web'),
       ),
-      body: Column(
-        children: [
-          Text(
-            getUserData().toString(),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Display Name: ${userData['displayName']}'),
+            Text('Email: ${userData['email']}'),
+            Image.network(
+              userData['photoUrl'] ?? '',
+              height: 100,
+            ),
+          ],
+        ),
       ),
     );
   }
