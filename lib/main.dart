@@ -27,7 +27,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   // This widget is the root of your application.
   @override
@@ -58,8 +58,53 @@ class MyApp extends StatelessWidget {
             );
           }
 
-          return const HomeScreen();
+          return const LoginScreen();
         },
+      ),
+    );
+  }
+}
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () async {
+            // Sign in the user using Firebase authentication
+            final UserCredential userCredential =
+                await FirebaseAuth.instance.signInAnonymously();
+
+            // Store the user's credentials in Firebase's authentication state
+            if (userCredential.user != null) {
+              FirebaseAuth.instance.signInWithCredential(
+                userCredential.credential!,
+              );
+            }
+
+            // Store the user's credentials in the device's secure storage
+            final SharedPreferences prefs =
+                await SharedPreferences.getInstance();
+            prefs.setString('userId', userCredential.user?.uid ?? '');
+            prefs.setString(
+                'userToken', userCredential.credential?.token as String);
+
+            // Navigate to the home screen
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomeScreen(),
+              ),
+            );
+          },
+          child: const Text('Sign In Anonymously'),
+        ),
       ),
     );
   }
@@ -73,39 +118,47 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Map<String, String> userData = {};
+  late Future<Map<String, String>> _userData;
 
   Future<Map<String, String>> getUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String name = prefs.getString('displayName') ?? '';
-    String email = prefs.getString('email') ?? '';
-    return {'name': name, 'email': email};
+    String userId = prefs.getString('userId') ?? '';
+    String userToken = prefs.getString('userToken') ?? '';
+    return {'userId': userId, 'userToken': userToken};
   }
 
   @override
-  void initState() async {
-    userData = await getUserData();
+  void initState() {
     super.initState();
+    _userData = getUserData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('everything shivpuri web'),
+        title: const Text('Home'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Name: ${userData['name']}',
-            ),
-            Text(
-              'Email: ${userData['email']}',
-            ),
-          ],
-        ),
+      body: FutureBuilder<Map<String, String>>(
+        future: _userData,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else {
+            final userId = snapshot.data?['userId'];
+            final userToken = snapshot.data?['userToken'];
+            // Render the UI with the user data
+            return Center(
+              child: Text('User ID: $userId\nUser Token: $userToken'),
+            );
+          }
+        },
       ),
     );
   }
