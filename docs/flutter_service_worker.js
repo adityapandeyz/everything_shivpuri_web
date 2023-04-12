@@ -3,7 +3,7 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "c1f18cb64d4ec9fe6a36031694510d68",
+  "assets/AssetManifest.json": "63aa5370dcdaf79ad5dbddb5fd274596",
 "assets/assets/app_logo/Icon_960px.png": "f57e57fa8f4df864dcf6f3ddccab494d",
 "assets/assets/images/banks.jpeg": "ea5ddb15c2dd98ba9d83e820e45aa437",
 "assets/assets/images/colleges.jpeg": "82ada84fb9cf6f35aae8669078a1398a",
@@ -11,14 +11,13 @@ const RESOURCES = {
 "assets/assets/images/food.jpeg": "37d4a09e39e48d8a0dac2ed1cee94273",
 "assets/assets/images/government.jpeg": "b107276d3862c760fe3197b18cba562b",
 "assets/assets/images/healthcare.jpeg": "b3ed1380643943cc149961952e1044a1",
+"assets/assets/images/home_page.jpeg": "88eb65847adce9e4a590ced113ae433a",
 "assets/assets/images/hotel.jpeg": "58e6c1beabaa2e3bb6d7fbd1b17c2927",
 "assets/assets/images/markets.jpeg": "3ceaf0151ebadca3b2e5dfe0481c137b",
 "assets/assets/images/saloons.jpeg": "96b644209797d24e51bcde0734899279",
 "assets/assets/images/schools.jpeg": "a67ac586b0320aee0237af1b19ec6542",
 "assets/assets/images/temples.jpeg": "26ab41772fdc91b738c5f2cb7b2d466b",
 "assets/assets/images/tourism.jpeg": "8d1b2239d13a3550e09c23c8c64f0700",
-"assets/assets/images/_0b3ef06c-bb9d-4dd6-a95d-020f2c84462c.jpeg": "3ceaf0151ebadca3b2e5dfe0481c137b",
-"assets/assets/images/_1be56d7c-55fe-4efc-bf31-1d597aaa321e.jpeg": "88eb65847adce9e4a590ced113ae433a",
 "assets/FontManifest.json": "5a32d4310a6f5d9a6b651e75ba0d7372",
 "assets/fonts/MaterialIcons-Regular.otf": "e7069dfd19b331be16bed984668fe080",
 "assets/NOTICES": "e63212f2ff7377722da25a40d4f2877d",
@@ -36,9 +35,9 @@ const RESOURCES = {
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "fe49f19fa4b1f00686df83e3a771084b",
-"/": "fe49f19fa4b1f00686df83e3a771084b",
-"main.dart.js": "3ace0317686c83396475af54186903c2",
+"index.html": "4a9e9622e3559a1bc16b6ecec7cd24b0",
+"/": "4a9e9622e3559a1bc16b6ecec7cd24b0",
+"main.dart.js": "8808f9da1a044c3272104885c43499c0",
 "manifest.json": "d76f376afcd94c7da2be037dca574d3f",
 "version.json": "d449eb7412eb1a6bf21d80b49bbddb88"
 };

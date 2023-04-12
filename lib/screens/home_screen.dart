@@ -24,13 +24,12 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height / 4,
-              child: const Image(
+              height: 300,
+              child: Image(
                 fit: BoxFit.cover,
-                image: AssetImage(
-                    'assets/images/_1be56d7c-55fe-4efc-bf31-1d597aaa321e.jpeg'),
+                image: AssetImage('assets/images/home_page.jpeg'),
               ),
             ),
             const SizedBox(
