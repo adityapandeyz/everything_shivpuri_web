@@ -1,3 +1,4 @@
+import 'package:everything_shivpuri_web/screens/error_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         useMaterial3: true,
         primarySwatch: Colors.blue,
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {TargetPlatform.android: CupertinoPageTransitionsBuilder()},
+        ),
       ),
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -47,9 +51,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               return const HomeScreen();
             } else if (snapshot.hasError) {
-              return Center(
-                child: Text('${snapshot.error}'),
-              );
+              return const ErrorScreen();
             }
           }
 
